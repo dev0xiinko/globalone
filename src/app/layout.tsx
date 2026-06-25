@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   title: "GLOBAL ONE | Realty & Property Management Corporation",
   description:
     "Global One — an immersive portfolio of premium properties. Explore homes, condominiums and investments with a fully licensed realty corporation.",
+  icons: {
+    icon: "/globalone-logo.png",
+    shortcut: "/globalone-logo.png",
+    apple: "/globalone-logo.png",
+  },
 };
 
 // Runs before paint to avoid a flash of the wrong theme.
