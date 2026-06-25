@@ -1,26 +1,334 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   GLOBAL ONE — premium theme
+   Warm-ivory light + deep-navy dark, brand blue/gold accents.
+   Bridged into Tailwind v4 via @theme. Toggle via data-theme / .dark.
+   ========================================================================= */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *), &:where(.dark, .dark *));
+
+/* -------------------------------------------------------------------------
+   1. Brand palette + LIGHT theme
+   ------------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-blue: #034a98;
+  --brand-blue-600: #023b78;
+  --brand-blue-400: #3b86dd;
+  --brand-gold: #feb413;
+  --brand-gold-600: #d99a00;
+  --brand-red: #e32225;
+  --brand-red-400: #f24b4e;
+
+  --background: #fbfaf8;
+  --foreground: #14171f;
+  --card: #ffffff;
+  --card-foreground: #14171f;
+  --muted: #f2f1ec;
+  --muted-foreground: #6b6f78;
+  --border: #e8e4db;
+  --input: #e1ddd3;
+
+  --primary: var(--brand-blue);
+  --primary-hover: var(--brand-blue-600);
+  --primary-foreground: #ffffff;
+  --primary-subtle: #e9f0fb;
+
+  --secondary: var(--brand-gold);
+  --secondary-hover: var(--brand-gold-600);
+  --secondary-foreground: #1a1304;
+  --secondary-subtle: #fff4d6;
+
+  --accent: #eef3fa;
+  --accent-foreground: var(--brand-blue);
+
+  --destructive: var(--brand-red);
+  --destructive-foreground: #ffffff;
+
+  --ring: var(--brand-blue);
+
+  /* always-dark editorial surface */
+  --ink: #0c0f17;
+  --ink-foreground: #f3f4f7;
+
+  --radius: 0.75rem;
+  --radius-sm: 0.5rem;
+  --radius-lg: 1.25rem;
+  --shadow-sm: 0 1px 2px rgba(20, 23, 31, 0.05);
+  --shadow: 0 10px 30px -12px rgba(20, 23, 31, 0.18);
+  --shadow-lg: 0 30px 60px -20px rgba(20, 23, 31, 0.28);
+  --shadow-gold: 0 20px 50px -20px rgba(254, 180, 19, 0.45);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
 }
 
+/* -------------------------------------------------------------------------
+   2. DARK theme
+   ------------------------------------------------------------------------- */
+:root[data-theme="dark"],
+:root.dark {
+  --background: #080a10;
+  --foreground: #eceef3;
+  --card: #12151e;
+  --card-foreground: #eceef3;
+  --muted: #161a24;
+  --muted-foreground: #9aa1ad;
+  --border: #222734;
+  --input: #2a3040;
+
+  --primary: var(--brand-blue-400);
+  --primary-hover: #5a9ee8;
+  --primary-foreground: #04101d;
+  --primary-subtle: rgba(59, 134, 221, 0.16);
+
+  --secondary: var(--brand-gold);
+  --secondary-hover: #ffc63d;
+  --secondary-foreground: #1a1304;
+  --secondary-subtle: rgba(254, 180, 19, 0.16);
+
+  --accent: #182234;
+  --accent-foreground: var(--brand-blue-400);
+
+  --destructive: var(--brand-red-400);
+  --destructive-foreground: #1a0506;
+
+  --ring: var(--brand-blue-400);
+
+  --ink: #0f131c;
+  --ink-foreground: #f3f4f7;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow: 0 14px 36px -14px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 36px 70px -24px rgba(0, 0, 0, 0.8);
+  --shadow-gold: 0 24px 60px -22px rgba(254, 180, 19, 0.3);
+
+  color-scheme: dark;
+}
+
+/* -------------------------------------------------------------------------
+   3. Tailwind bridge — colors & fonts (runtime-switchable → inline)
+   ------------------------------------------------------------------------- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-ring: var(--ring);
+
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-surface: var(--background);
+  --color-surface-container-low: var(--muted);
+  --color-on-surface: var(--foreground);
+  --color-on-surface-variant: var(--muted-foreground);
+  --color-secondary-fixed: var(--secondary);
+  --color-secondary-container: var(--secondary);
+
+  --font-sans: var(--font-inter);
+  --font-display-lg: var(--font-inter);
+  --font-headline-lg: var(--font-inter);
+  --font-headline-md: var(--font-inter);
+  --font-body-lg: var(--font-inter);
+  --font-body-md: var(--font-inter);
+  --font-label-caps: var(--font-inter);
+  --font-price-display: var(--font-inter);
+
+  --shadow-premium: var(--shadow);
+  --shadow-premium-lg: var(--shadow-lg);
+  --shadow-premium-gold: var(--shadow-gold);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* -------------------------------------------------------------------------
+   4. Tailwind bridge — static editorial scale
+   ------------------------------------------------------------------------- */
+@theme {
+  --spacing-section-gap: 160px;
+  --spacing-edge-margin-mobile: 24px;
+  --spacing-edge-margin-desktop: 80px;
+  --spacing-gutter: 32px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 24px;
+  --spacing-container-max: 1440px;
+
+  --text-display-lg: 80px;
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-lg--font-weight: 600;
+
+  --text-display-lg-mobile: 40px;
+  --text-display-lg-mobile--line-height: 1.2;
+  --text-display-lg-mobile--font-weight: 600;
+
+  --text-headline-lg: 48px;
+  --text-headline-lg--line-height: 1.15;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 500;
+
+  --text-headline-lg-mobile: 32px;
+  --text-headline-lg-mobile--line-height: 1.25;
+  --text-headline-lg-mobile--font-weight: 500;
+
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 1.3;
+  --text-headline-md--font-weight: 500;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.7;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.65;
+  --text-body-md--font-weight: 400;
+
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 1;
+  --text-label-caps--letter-spacing: 0.18em;
+  --text-label-caps--font-weight: 600;
+
+  --text-price-display: 24px;
+  --text-price-display--line-height: 1;
+  --text-price-display--letter-spacing: -0.01em;
+  --text-price-display--font-weight: 300;
+}
+
+/* -------------------------------------------------------------------------
+   5. Base
+   ------------------------------------------------------------------------- */
+html {
+  /* ScrollSmoother drives scrolling; keep native as graceful fallback */
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+::selection {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
+}
+
+/* -------------------------------------------------------------------------
+   6. ScrollSmoother structure
+   ------------------------------------------------------------------------- */
+#smooth-wrapper {
+  overflow: hidden;
+}
+#smooth-content {
+  will-change: transform;
+}
+
+/* -------------------------------------------------------------------------
+   7. Premium utilities
+   ------------------------------------------------------------------------- */
+.text-gradient-gold {
+  background: linear-gradient(120deg, #feb413 0%, #ffd778 50%, #d99a00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+.hairline {
+  border-color: color-mix(in srgb, var(--foreground) 12%, transparent);
+}
+
+/* Prevent split-text flash before JS measures lines */
+.split-prep {
+  visibility: hidden;
+}
+
+/* -------------------------------------------------------------------------
+   8. Interactions
+   ------------------------------------------------------------------------- */
+.property-card-interactive .overlay {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.property-card-interactive:hover .overlay {
+  opacity: 1;
+}
+.property-card-interactive:hover img {
+  transform: scale(1.08);
+}
+.property-card-interactive .details {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.property-card-interactive:hover .details {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .split-prep {
+    visibility: visible;
+  }
 }

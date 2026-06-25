@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LUMIÈRE ESTATES | Defining the Art of Living</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&amp;family=Inter:wght@300;400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fbf9f8",
+                    "on-primary-fixed": "#1c1b1b",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#fed488",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#c8c6c5",
+                    "secondary-fixed-dim": "#e9c176",
+                    "surface-tint": "#5f5e5e",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#848480",
+                    "surface-container-high": "#e9e8e7",
+                    "primary-fixed": "#e5e2e1",
+                    "outline": "#747878",
+                    "on-tertiary-fixed": "#1b1c19",
+                    "outline-variant": "#c4c7c7",
+                    "inverse-surface": "#303031",
+                    "secondary": "#775a19",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "on-secondary-fixed": "#261900",
+                    "surface-container": "#efeded",
+                    "primary-container": "#1c1b1b",
+                    "on-background": "#1b1c1c",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "tertiary-fixed": "#e4e2dd",
+                    "primary": "#000000",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-error-container": "#93000a",
+                    "surface": "#fbf9f8",
+                    "tertiary": "#000000",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#474744",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#785a1a",
+                    "tertiary-fixed-dim": "#c8c6c2",
+                    "on-primary-fixed-variant": "#474746",
+                    "on-surface": "#1b1c1c",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#ffdea5",
+                    "tertiary-container": "#1b1c19",
+                    "surface-variant": "#e4e2e2",
+                    "surface-dim": "#dbdad9",
+                    "surface-container-low": "#f5f3f3",
+                    "surface-container-highest": "#e4e2e2",
+                    "on-surface-variant": "#444748",
+                    "background": "#fbf9f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "160px",
+                    "stack-md": "24px",
+                    "edge-margin-mobile": "24px",
+                    "container-max": "1440px",
+                    "stack-sm": "8px",
+                    "edge-margin-desktop": "80px",
+                    "gutter": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Playfair Display"],
+                    "price-display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "price-display": ["24px", {"lineHeight": "1.0", "letterSpacing": "-0.01em", "fontWeight": "300"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "display-lg": ["80px", {"lineHeight": "1.05", "letterSpacing": "-0.03em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .property-card-interactive .overlay {
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .property-card-interactive:hover .overlay {
+            opacity: 1;
+        }
+        .property-card-interactive:hover img {
+            transform: scale(1.1);
+        }
+        .property-card-interactive .details {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .property-card-interactive:hover .details {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-secondary-container/30 overflow-x-hidden">
+<!-- Navigation -->
+<header class="fixed top-0 w-full z-50 transition-all duration-500" id="main-nav">
+<nav class="max-w-[1440px] mx-auto px-edge-margin-mobile md:px-edge-margin-desktop flex justify-between items-center h-24">
+<a class="font-display-lg text-[20px] md:text-[28px] tracking-tight text-white mix-blend-difference" href="/">LUMIÈRE ESTATES</a>
+<div class="hidden lg:flex items-center space-x-12">
+<a class="font-label-caps text-label-caps text-white mix-blend-difference hover:opacity-70 transition-opacity" href="#">Portfolio</a>
+<a class="font-label-caps text-label-caps text-white mix-blend-difference hover:opacity-70 transition-opacity" href="#">Bespoke</a>
+<a class="font-label-caps text-label-caps text-white mix-blend-difference hover:opacity-70 transition-opacity" href="#">Journal</a>
+<button class="font-label-caps text-label-caps bg-white text-primary px-8 py-3 transition-all duration-400 hover:bg-secondary hover:text-white">
+                Inquire
+            </button>
+</div>
+<button class="lg:hidden text-white mix-blend-difference">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</nav>
+</header>
+<main>
+<!-- Full-Bleed Hero -->
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Luxury Villa" class="w-full h-full object-cover scale-105" id="hero-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8FkeKycn972QJDbV1-U3P1UpXAwWeUW64Okd_HutFp0mB9hJs2jdfSAFtqBjbEkzakA5jtZPjayYa_xSERq7ZPfBa-OA7Aa_uV1tRZQErBWKOTLUrn4eMcLl4lX6sfBQP8v_rLEuCcAPOjb_GcrnXgBRa00aDQfbxlEQcCwPUF0qyJKh3oC3ZHPVyVHIXSa743ppMHeC50kbrv-pgc4WSTHx5a9A6d9jDoP5Ee9u0lDIpX-XyDdfk0Gfb3Oc61kOcmfO-00WgxOk"/>
+<div class="absolute inset-0 bg-black/20"></div>
+</div>
+<div class="relative z-10 text-center px-edge-margin-mobile max-w-5xl">
+<span class="reveal font-label-caps text-label-caps text-white/80 tracking-[0.3em] mb-6 block">ESTABLISHED 1984</span>
+<h1 class="reveal font-display-lg text-[56px] md:text-[96px] text-white leading-[1] mb-8 drop-shadow-2xl">
+                The Curated <br/>Heritage
+            </h1>
+<div class="reveal flex flex-col sm:flex-row justify-center gap-6 mt-12">
+<button class="border border-white text-white font-label-caps text-label-caps px-12 py-5 backdrop-blur-sm transition-all duration-400 hover:bg-white hover:text-primary">
+                    View Collections
+                </button>
+</div>
+</div>
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-white/60">
+<span class="font-label-caps text-[10px] tracking-widest">SCROLL</span>
+<div class="w-[1px] h-16 bg-white/30 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full bg-white animate-[scroll_2s_infinite]"></div>
+</div>
+</div>
+</section>
+<!-- Expansive Property Gallery -->
+<section class="py-section-gap bg-surface">
+<div class="max-w-[1440px] mx-auto px-edge-margin-mobile md:px-edge-margin-desktop">
+<div class="reveal flex flex-col md:flex-row justify-between items-baseline mb-24 gap-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Private Residences</h2>
+<p class="font-body-lg text-on-surface-variant mt-4 max-w-lg">An exclusive portfolio of properties that redefine the architectural landscape.</p>
+</div>
+<a class="font-label-caps text-label-caps text-secondary border-b border-secondary/30 pb-2 hover:border-secondary transition-all" href="#">Explore All Archives</a>
+</div>
+<!-- Interactive Hover Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter">
+<!-- Large Featured -->
+<div class="reveal lg:col-span-8 group property-card-interactive relative aspect-[4/3] overflow-hidden cursor-pointer">
+<img alt="Malibu Estate" class="w-full h-full object-cover transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNVIjvYRdS7kbFm6nE3O0HumC6dMewrLFg4JORuQMP53MDimjdNRuQHrRqE_Z409vykXEyLFFawQz_YJktVn1iobqC3mWdiTBT-riFuT4LNlwZTBcf9nOavWAJA3XTly2KVpGV3ySUiSUlvwQkeJgd6aaGYyav0o2EXm-TPyWPIWPHfTW6qR98Wepd26V7OHOe2ao76fYnfhk6lVTplj_H7jRG1Pm0LUWI63V4eyrPf4YmoyMp3CAFmnymWi0x0O4AZmyhihfnOKE"/>
+<div class="overlay absolute inset-0 flex flex-col justify-end p-12 text-white">
+<div class="details space-y-4">
+<span class="font-label-caps text-xs tracking-widest text-secondary-fixed">MALIBU, CA</span>
+<h3 class="font-display-lg text-[40px] leading-none">The Azure Pavilion</h3>
+<div class="flex gap-8 border-t border-white/20 pt-6">
+<p class="font-label-caps text-[10px]">6 BEDS</p>
+<p class="font-label-caps text-[10px]">8 BATHS</p>
+<p class="font-label-caps text-[10px]">12,400 SQFT</p>
+<p class="font-price-display ml-auto text-2xl">$24,500,000</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Item 1 -->
+<div class="reveal lg:col-span-4 group property-card-interactive relative aspect-[3/4] overflow-hidden cursor-pointer">
+<img alt="Manhattan Penthouse" class="w-full h-full object-cover transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1KL0Y8fu40j481qWQfgTZtvQ-wZzfFJ9Wmoh5bQSWsUI3HTAQr58DBhZ_ugwYuqd8Rfsr3lHM-Rq34RKshoxKWhg8loHzTeBRoJM6F9LzwxQvR1x-CPaphNu6RuLzQzwNRveRp1BYPivq86ZJtBzutlKYrrBaEM40ARPA41Ojsp4DLlaWEFDlKwSGx0Hkg8yUsZoHW6coV5Brhymrs-HFnrjl0el97rDmsTNSo1OdLkiPeWDsaAm_yoCflwQowDEKFrT7BHz3NNY"/>
+<div class="overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
+<div class="details space-y-4">
+<span class="font-label-caps text-xs tracking-widest text-secondary-fixed">NEW YORK, NY</span>
+<h3 class="font-headline-md text-2xl">Skyline Sanctuary</h3>
+<p class="font-price-display text-xl">$18,200,000</p>
+</div>
+</div>
+</div>
+<!-- Side Item 2 -->
+<div class="reveal lg:col-span-4 group property-card-interactive relative aspect-[3/4] overflow-hidden cursor-pointer">
+<img alt="Provence Villa" class="w-full h-full object-cover transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0MH6xW7SZWhOcjw7DYughBoe2O0-oZwo8Lg60HZ7ZZz-hUuAjlwQXvRf3RAw8croMkvPrZnsPFNFBoFtMTGBTXPsq6ZaTH7VPhb8i3jBmp-uLnYw3zsb6ufk2_FP2b3380KMGwfsbuuAUi4lV5JrvJD0yHCLuLZ5HMroFUBM6Qy5ijhE-ff8dvVDPlgXIv_gkVO532frrHcFtMs3Bt7K7CyQnGw3rPIK5FPa0qVvfbfo631Yv2CjetadWCYxIvx3g4HTZs2SFccI"/>
+<div class="overlay absolute inset-0 flex flex-col justify-end p-8 text-white">
+<div class="details space-y-4">
+<span class="font-label-caps text-xs tracking-widest text-secondary-fixed">PROVENCE, FR</span>
+<h3 class="font-headline-md text-2xl">Villa de Lumière</h3>
+<p class="font-price-display text-xl">$42,000,000</p>
+</div>
+</div>
+</div>
+<!-- Secondary Large -->
+<div class="reveal lg:col-span-8 group property-card-interactive relative aspect-[4/3] overflow-hidden cursor-pointer">
+<img alt="Professional Advisory" class="w-full h-full object-cover transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2mJv605A-C7WrTp324u1esW8zNRDBuYQtOPUFdYmnyNt781mJ2dKbQl2msnsnobdh4KnfdPiFgvVXDvBs_BySvwFmzpvqeOhnGIKpRPlcMR0FnTtNvUKc0OGyeQufMNrsLHTYbYCg80_3yTNCiOwfnVncKN_PyfRY8Qj7Uj8LIJdjn-G5TpQEarkzMMF4clLC_T0cIgb0V6NEY8oiGKD4CED3AEkTGbWhfZG1_0pXZiIVFOKW3LgfbZ6I2WkDG17s6-cTOFeB5P8"/>
+<div class="overlay absolute inset-0 flex flex-col justify-end p-12 text-white">
+<div class="details space-y-4">
+<span class="font-label-caps text-xs tracking-widest text-secondary-fixed">BESPOKE SERVICES</span>
+<h3 class="font-display-lg text-[40px] leading-none">Concierge Advisory</h3>
+<p class="font-body-lg max-w-md">Private portfolio management and global acquisition strategy.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Narrative Section -->
+<section class="bg-primary text-white py-section-gap">
+<div class="max-w-[1440px] mx-auto px-edge-margin-mobile md:px-edge-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+<div class="reveal">
+<span class="font-label-caps text-secondary-fixed tracking-[0.4em] mb-8 block">THE VISION</span>
+<h2 class="font-display-lg text-[48px] md:text-[64px] leading-[1.1] mb-12 italic">"We don't just sell properties; we curate legacies."</h2>
+<p class="font-body-lg text-white/60 mb-12 leading-relaxed">
+                        Lumière Estates represents a philosophy of living where every detail is considered, every material is intentional, and every view is a masterpiece.
+                    </p>
+<div class="flex items-center gap-8">
+<div class="h-[1px] w-24 bg-white/30"></div>
+<p class="font-label-caps text-sm tracking-widest">ESTATE MANAGEMENT</p>
+</div>
+</div>
+<div class="reveal relative">
+<img alt="Advisor" class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2mJv605A-C7WrTp324u1esW8zNRDBuYQtOPUFdYmnyNt781mJ2dKbQl2msnsnobdh4KnfdPiFgvVXDvBs_BySvwFmzpvqeOhnGIKpRPlcMR0FnTtNvUKc0OGyeQufMNrsLHTYbYCg80_3yTNCiOwfnVncKN_PyfRY8Qj7Uj8LIJdjn-G5TpQEarkzMMF4clLC_T0cIgb0V6NEY8oiGKD4CED3AEkTGbWhfZG1_0pXZiIVFOKW3LgfbZ6I2WkDG17s6-cTOFeB5P8"/>
+<div class="absolute -bottom-10 -right-10 w-60 h-60 border border-white/10 -z-10 hidden lg:block"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonial -->
+<section class="py-section-gap bg-surface-container-low">
+<div class="max-w-4xl mx-auto px-edge-margin-mobile text-center">
+<div class="reveal">
+<span class="material-symbols-outlined text-6xl text-secondary/20 mb-8">format_quote</span>
+<blockquote class="font-headline-md text-3xl md:text-5xl italic text-primary leading-tight mb-12">
+                    "Lumière Estates redefined my expectations of luxury. Their ability to source off-market gems was unparalleled."
+                </blockquote>
+<div class="space-y-2">
+<p class="font-label-caps text-primary tracking-widest">JULIAN VANE</p>
+<p class="font-body-md text-on-surface-variant">VENTURE CAPITALIST, GENEVA</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-white pt-section-gap pb-12 border-t border-white/10">
+<div class="max-w-[1440px] mx-auto px-edge-margin-mobile md:px-edge-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-20 mb-32">
+<div class="col-span-1 md:col-span-1">
+<h2 class="font-display-lg text-3xl mb-8">LUMIÈRE</h2>
+<p class="font-body-md text-white/50 leading-relaxed max-w-xs">Curating architectural masterpieces for the global collector.</p>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-caps text-xs tracking-widest text-secondary-fixed">ARCHIVES</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-white/60 hover:text-white transition-colors" href="#">Coastline Estates</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">Urban Penthouses</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">Historic Manors</a>
+</nav>
+</div>
+<div class="space-y-6">
+<h4 class="font-label-caps text-xs tracking-widest text-secondary-fixed">ADVISORY</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-white/60 hover:text-white transition-colors" href="#">The Journal</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">Bespoke Service</a>
+<a class="text-white/60 hover:text-white transition-colors" href="#">Private Access</a>
+</nav>
+</div>
+<div class="space-y-8">
+<h4 class="font-label-caps text-xs tracking-widest text-secondary-fixed">JOURNAL</h4>
+<div class="relative">
+<input class="w-full bg-transparent border-b border-white/20 py-4 focus:outline-none focus:border-secondary transition-colors font-label-caps text-[10px]" placeholder="YOUR EMAIL ADDRESS" type="email"/>
+<button class="absolute right-0 top-1/2 -translate-y-1/2 text-secondary">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-[10px] font-label-caps tracking-widest text-white/30">
+<p>© 2024 LUMIÈRE ESTATES. ALL RIGHTS RESERVED.</p>
+<div class="flex gap-10 mt-6 md:mt-0">
+<a class="hover:text-white" href="#">PRIVACY</a>
+<a class="hover:text-white" href="#">TERMS</a>
+<a class="hover:text-white" href="#">COOKIE POLICY</a>
+</div>
+</div>
+</div>
+</footer>
+<style>
+    @keyframes scroll {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+    }
+</style>
+<script>
+    // Reveal Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav Change on Scroll
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        const heroHeight = window.innerHeight;
+        if (window.scrollY > 50) {
+            nav.classList.add('bg-surface/90', 'backdrop-blur-md', 'h-20');
+            nav.classList.remove('h-24');
+        } else {
+            nav.classList.remove('bg-surface/90', 'backdrop-blur-md', 'h-20');
+            nav.classList.add('h-24');
+        }
+        
+        // Hero Parallax
+        const heroImg = document.getElementById('hero-img');
+        if(heroImg) {
+            heroImg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.4}px)`;
+        }
+    });
+</script>
+</body></html>

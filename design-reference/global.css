@@ -1,0 +1,285 @@
+/* =========================================================================
+   global.css
+   Brand palette → semantic token system with light + dark mode.
+
+   Source palette:
+     #034a98  brand blue   → primary / links / focus ring
+     #feb413  brand gold   → secondary / highlights / warnings
+     #e32225  brand red    → destructive / danger  (de262a, dc2a31 = shades)
+     #000000  brand black  → ink in light, base in dark
+
+   Theming mechanism (any of these works):
+     <html>                         → follows OS (prefers-color-scheme)
+     <html data-theme="light">      → forced light
+     <html data-theme="dark">       → forced dark
+     <html class="dark">            → forced dark (shadcn-compatible alias)
+
+   Use the tokens, not the raw hexes, in your components:
+     color: var(--foreground); background: var(--primary); etc.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. Raw brand palette + LIGHT theme tokens (default)
+   ------------------------------------------------------------------------- */
+:root {
+  /* --- raw brand scale (rarely use directly) --- */
+  --brand-blue:        #034a98;
+  --brand-blue-600:    #023b78;   /* darker — hover/pressed   */
+  --brand-blue-400:    #2a78cf;   /* lighter — dark-mode tint */
+  --brand-gold:        #feb413;
+  --brand-gold-600:    #d99a00;
+  --brand-red:         #e32225;
+  --brand-red-600:     #c41a1d;
+  --brand-red-400:     #f24b4e;
+  --brand-black:       #000000;
+
+  /* --- surfaces & text --- */
+  --background:        #ffffff;
+  --foreground:        #0c0e12;
+  --card:              #ffffff;
+  --card-foreground:   #0c0e12;
+  --popover:           #ffffff;
+  --popover-foreground:#0c0e12;
+  --muted:             #f3f5f8;
+  --muted-foreground:  #5b6470;
+  --border:            #e3e7ec;
+  --input:             #e3e7ec;
+
+  /* --- semantic roles --- */
+  --primary:               var(--brand-blue);
+  --primary-hover:         var(--brand-blue-600);
+  --primary-foreground:    #ffffff;
+  --primary-subtle:        #e9f0fb;          /* tinted background block */
+
+  --secondary:             var(--brand-gold);
+  --secondary-hover:       var(--brand-gold-600);
+  --secondary-foreground:  #1a1304;          /* dark ink reads on gold  */
+  --secondary-subtle:      #fff4d6;
+
+  --accent:                #eef3fa;          /* quiet hover/selected     */
+  --accent-foreground:     var(--brand-blue);
+
+  --destructive:           var(--brand-red);
+  --destructive-hover:     var(--brand-red-600);
+  --destructive-foreground:#ffffff;
+  --destructive-subtle:    #fde7e7;
+
+  --ring:                  var(--brand-blue);
+
+  /* --- shape, elevation, motion --- */
+  --radius:        0.625rem;
+  --radius-sm:     0.375rem;
+  --radius-lg:     1rem;
+  --shadow-sm:     0 1px 2px rgba(12, 14, 18, 0.06);
+  --shadow:        0 4px 14px rgba(12, 14, 18, 0.08);
+  --shadow-lg:     0 12px 40px rgba(12, 14, 18, 0.12);
+  --ease:          cubic-bezier(0.4, 0, 0.2, 1);
+
+  color-scheme: light;
+}
+
+/* -------------------------------------------------------------------------
+   2. DARK theme tokens
+      Applied when explicitly chosen via data-theme="dark" or .dark class.
+      Raw brand scale stays the same; only surfaces + adjusted roles change.
+   ------------------------------------------------------------------------- */
+:root[data-theme="dark"],
+:root.dark {
+  --background:        #0b0e14;
+  --foreground:        #eef1f6;
+  --card:              #12161f;
+  --card-foreground:   #eef1f6;
+  --popover:           #12161f;
+  --popover-foreground:#eef1f6;
+  --muted:             #1a1f2a;
+  --muted-foreground:  #98a2b3;
+  --border:            #242b38;
+  --input:             #242b38;
+
+  /* brighten brand so it stays legible on dark surfaces */
+  --primary:               var(--brand-blue-400);
+  --primary-hover:         #4a90e2;
+  --primary-foreground:    #06121f;
+  --primary-subtle:        rgba(42, 120, 207, 0.16);
+
+  --secondary:             var(--brand-gold);
+  --secondary-hover:       #ffc63d;
+  --secondary-foreground:  #1a1304;
+  --secondary-subtle:      rgba(254, 180, 19, 0.16);
+
+  --accent:                #1b2230;
+  --accent-foreground:     var(--brand-blue-400);
+
+  --destructive:           var(--brand-red-400);
+  --destructive-hover:     #ff6063;
+  --destructive-foreground:#1a0506;
+  --destructive-subtle:    rgba(242, 75, 78, 0.16);
+
+  --ring:                  var(--brand-blue-400);
+
+  --shadow-sm:     0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow:        0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg:     0 12px 40px rgba(0, 0, 0, 0.6);
+
+  color-scheme: dark;
+}
+
+/* Follow the OS when the user hasn't picked a theme explicitly. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]):not(.light):not(.dark) {
+    --background:        #0b0e14;
+    --foreground:        #eef1f6;
+    --card:              #12161f;
+    --card-foreground:   #eef1f6;
+    --popover:           #12161f;
+    --popover-foreground:#eef1f6;
+    --muted:             #1a1f2a;
+    --muted-foreground:  #98a2b3;
+    --border:            #242b38;
+    --input:             #242b38;
+
+    --primary:               var(--brand-blue-400);
+    --primary-hover:         #4a90e2;
+    --primary-foreground:    #06121f;
+    --primary-subtle:        rgba(42, 120, 207, 0.16);
+
+    --secondary:             var(--brand-gold);
+    --secondary-hover:       #ffc63d;
+    --secondary-foreground:  #1a1304;
+    --secondary-subtle:      rgba(254, 180, 19, 0.16);
+
+    --accent:                #1b2230;
+    --accent-foreground:     var(--brand-blue-400);
+
+    --destructive:           var(--brand-red-400);
+    --destructive-hover:     #ff6063;
+    --destructive-foreground:#1a0506;
+    --destructive-subtle:    rgba(242, 75, 78, 0.16);
+
+    --ring:                  var(--brand-blue-400);
+
+    --shadow-sm:     0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow:        0 4px 14px rgba(0, 0, 0, 0.5);
+    --shadow-lg:     0 12px 40px rgba(0, 0, 0, 0.6);
+
+    color-scheme: dark;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   3. Base reset
+   ------------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  /* smooth the flip between themes */
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover { color: var(--primary-hover); text-decoration: underline; }
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Visible keyboard focus everywhere. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* -------------------------------------------------------------------------
+   4. Optional component utilities (ready to use, delete what you don't need)
+   ------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.15s var(--ease), color 0.15s var(--ease),
+              border-color 0.15s var(--ease), transform 0.05s var(--ease);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary     { background: var(--primary);     color: var(--primary-foreground); }
+.btn-primary:hover     { background: var(--primary-hover); }
+
+.btn-secondary   { background: var(--secondary);   color: var(--secondary-foreground); }
+.btn-secondary:hover   { background: var(--secondary-hover); }
+
+.btn-destructive { background: var(--destructive); color: var(--destructive-foreground); }
+.btn-destructive:hover { background: var(--destructive-hover); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--foreground);
+  border-color: var(--border);
+}
+.btn-outline:hover { background: var(--accent); color: var(--accent-foreground); }
+
+.btn-ghost { background: transparent; color: var(--foreground); }
+.btn-ghost:hover { background: var(--accent); }
+
+.card {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+}
+.badge-primary     { background: var(--primary-subtle);     color: var(--primary); }
+.badge-secondary   { background: var(--secondary-subtle);   color: var(--secondary-hover); }
+.badge-destructive { background: var(--destructive-subtle); color: var(--destructive); }
+
+input, textarea, select {
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--input);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--ring); }
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
