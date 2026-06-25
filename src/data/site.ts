@@ -139,3 +139,47 @@ export const TESTIMONIALS: Testimonial[] = [
     role: "Developer Partner, Quezon City",
   },
 ];
+
+// ── Company contact details ──────────────────────────────────────────────────
+export const CONTACT_INFO = {
+  hours: "Monday – Saturday · 8:30 AM – 5:30 PM",
+  address: [
+    "Room 401, 4th Floor, Crown Building",
+    "Road North 6, North Reclamation Area",
+    "Cebu City 6000, Philippines",
+  ],
+  phones: ["+63 32 412 3112", "+63 32 255 2986"],
+  mobile: "+63 908 813 8520",
+  email: "info@globalonerealtycorp.com",
+};
+
+export type SocialLink = {
+  label: string;
+  href: string;
+  icon: "facebook" | "x" | "instagram";
+};
+
+export const SOCIAL_LINKS: SocialLink[] = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/GlobalOneRealty/",
+    icon: "facebook",
+  },
+  { label: "X", href: "https://x.com/Global1Realty", icon: "x" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/globalonerealty/",
+    icon: "instagram",
+  },
+];
+
+export const FOOTER_LINKS = [
+  { label: "Home", href: "#top" },
+  { label: "About Us", href: "#about" },
+  { label: "Properties", href: "#featured" },
+  { label: "Partners", href: "#" },
+  { label: "Blog", href: "#" },
+  { label: "Contact Us", href: "#contact" },
+  { label: "Terms & Conditions", href: "#" },
+  { label: "Privacy Policy", href: "#" },
+];

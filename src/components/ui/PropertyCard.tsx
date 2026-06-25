@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Listing } from "@/data/properties";
 
 const tagStyles: Record<Listing["tag"], string> = {
@@ -19,7 +20,9 @@ export default function PropertyCard({
   mediaClassName?: string;
 }) {
   return (
-    <article
+    <Link
+      href={`/properties/${listing.id}`}
+      aria-label={`View ${listing.title}`}
       className={
         seamless
           ? "group flex h-full flex-col overflow-hidden bg-card"
@@ -79,6 +82,6 @@ export default function PropertyCard({
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

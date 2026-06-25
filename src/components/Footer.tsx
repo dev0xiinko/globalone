@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Panel from "@/components/anim/Panel";
-
-const archives = ["Coastline Estates", "Urban Penthouses", "Historic Manors"];
-const advisory = ["The Journal", "Bespoke Service", "Private Access"];
-const legal = ["PRIVACY", "TERMS", "COOKIE POLICY"];
+import SocialIcon from "@/components/ui/SocialIcon";
+import { CONTACT_INFO, FOOTER_LINKS, SOCIAL_LINKS } from "@/data/site";
 
 export default function Footer() {
   return (
@@ -14,8 +12,9 @@ export default function Footer() {
       className="flex min-h-screen scroll-mt-24 flex-col justify-center px-edge-margin-mobile py-32 md:px-edge-margin-desktop"
     >
       <div className="mx-auto w-full max-w-container-max">
-        <div className="mb-24 grid grid-cols-1 gap-16 md:grid-cols-4 md:gap-20">
-          <div data-panel-item className="col-span-1 md:col-span-1">
+        <div className="mb-20 grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-12">
+          {/* Brand + social */}
+          <div data-panel-item className="md:col-span-4">
             <Image
               src="/globalone-logo.png"
               alt="Global One — Realty & Property Management Corporation"
@@ -31,80 +30,129 @@ export default function Footer() {
               className="mb-8 hidden h-20 w-auto dark:block"
             />
             <p className="font-body-md max-w-xs leading-relaxed text-on-surface-variant">
-              Curating architectural masterpieces for the global collector.
+              Global One Realty &amp; Property Management Corporation — premium
+              real estate for the discerning Filipino market.
             </p>
-          </div>
 
-          <div data-panel-item className="space-y-6">
-            <h4 className="font-label-caps text-xs tracking-widest text-secondary">
-              ARCHIVES
+            <h4 className="font-label-caps text-xs mt-10 mb-5 tracking-widest text-secondary">
+              GET CONNECTED
             </h4>
-            <nav className="flex flex-col gap-4">
-              {archives.map((item) => (
+            <div className="flex items-center gap-3">
+              {SOCIAL_LINKS.map((s) => (
                 <a
-                  key={item}
-                  className="text-on-surface-variant transition-colors hover:text-on-surface"
-                  href="#featured"
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-on-surface-variant transition-colors hover:border-secondary hover:bg-secondary hover:text-secondary-foreground"
                 >
-                  {item}
+                  <SocialIcon icon={s.icon} className="h-4.5 w-4.5" />
                 </a>
               ))}
-            </nav>
-          </div>
-
-          <div data-panel-item className="space-y-6">
-            <h4 className="font-label-caps text-xs tracking-widest text-secondary">
-              ADVISORY
-            </h4>
-            <nav className="flex flex-col gap-4">
-              {advisory.map((item) => (
-                <a
-                  key={item}
-                  className="text-on-surface-variant transition-colors hover:text-on-surface"
-                  href="#services"
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-          </div>
-
-          <div data-panel-item className="space-y-8">
-            <h4 className="font-label-caps text-xs tracking-widest text-secondary">
-              JOURNAL
-            </h4>
-            <form className="relative">
-              <input
-                className="font-label-caps w-full rounded-md border border-input bg-card px-4 py-3 text-[11px] tracking-widest text-on-surface outline-none transition-colors focus:border-ring"
-                placeholder="YOUR EMAIL ADDRESS"
-                type="email"
-              />
-              <button
-                type="submit"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary"
-                aria-label="Subscribe"
+              <a
+                href={`mailto:${CONTACT_INFO.email}`}
+                aria-label="Email"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-on-surface-variant transition-colors hover:border-secondary hover:bg-secondary hover:text-secondary-foreground"
               >
-                <span className="material-symbols-outlined">east</span>
-              </button>
-            </form>
+                <span className="material-symbols-outlined text-xl">mail</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Quick links */}
+          <div data-panel-item className="md:col-span-3">
+            <h4 className="font-label-caps text-xs mb-6 tracking-widest text-secondary">
+              QUICK LINKS
+            </h4>
+            <nav className="grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-1">
+              {FOOTER_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="font-body-md text-on-surface-variant transition-colors hover:text-on-surface"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          </div>
+
+          {/* Contact details */}
+          <div data-panel-item className="md:col-span-5">
+            <h4 className="font-label-caps text-xs mb-6 tracking-widest text-secondary">
+              VISIT US
+            </h4>
+
+            <ul className="flex flex-col gap-5">
+              <li className="font-body-md flex items-start gap-3 text-on-surface-variant">
+                <span className="material-symbols-outlined text-secondary">
+                  schedule
+                </span>
+                <span>{CONTACT_INFO.hours}</span>
+              </li>
+              <li className="font-body-md flex items-start gap-3 text-on-surface-variant">
+                <span className="material-symbols-outlined text-secondary">
+                  location_on
+                </span>
+                <span>
+                  {CONTACT_INFO.address.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </span>
+              </li>
+              <li className="font-body-md flex items-start gap-3 text-on-surface-variant">
+                <span className="material-symbols-outlined text-secondary">
+                  call
+                </span>
+                <span className="flex flex-col">
+                  {CONTACT_INFO.phones.map((phone) => (
+                    <a
+                      key={phone}
+                      href={`tel:${phone.replace(/\s/g, "")}`}
+                      className="transition-colors hover:text-on-surface"
+                    >
+                      {phone}
+                    </a>
+                  ))}
+                  <a
+                    href={`tel:${CONTACT_INFO.mobile.replace(/\s/g, "")}`}
+                    className="transition-colors hover:text-on-surface"
+                  >
+                    {CONTACT_INFO.mobile}{" "}
+                    <span className="text-on-surface-variant/70">(Smart)</span>
+                  </a>
+                </span>
+              </li>
+              <li className="font-body-md flex items-start gap-3 text-on-surface-variant">
+                <span className="material-symbols-outlined text-secondary">
+                  mail
+                </span>
+                <a
+                  href={`mailto:${CONTACT_INFO.email}`}
+                  className="transition-colors hover:text-on-surface"
+                >
+                  {CONTACT_INFO.email}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
         <div
           data-panel-item
-          className="font-label-caps flex flex-col items-center justify-between gap-6 text-[10px] tracking-widest text-on-surface-variant md:flex-row"
+          className="font-label-caps flex flex-col items-center justify-between gap-6 border-t border-border pt-10 text-[10px] tracking-widest text-on-surface-variant md:flex-row"
         >
           <p>© 2026 GLOBAL ONE REALTY &amp; PROPERTY MANAGEMENT CORPORATION.</p>
           <div className="flex gap-10">
-            {legal.map((item) => (
-              <a
-                key={item}
-                className="transition-colors hover:text-on-surface"
-                href="#"
-              >
-                {item}
-              </a>
-            ))}
+            <a href="#" className="transition-colors hover:text-on-surface">
+              TERMS
+            </a>
+            <a href="#" className="transition-colors hover:text-on-surface">
+              PRIVACY
+            </a>
           </div>
         </div>
       </div>

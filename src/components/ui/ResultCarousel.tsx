@@ -24,7 +24,7 @@ export default function ResultCarousel({
   rounded?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const drag = useRef({ down: false, startX: 0, startLeft: 0 });
+  const drag = useRef({ down: false, startX: 0, startLeft: 0, moved: false });
   const [progress, setProgress] = useState(0);
   const [thumb, setThumb] = useState(1);
   const s = SIZES[size];
@@ -48,17 +48,33 @@ export default function ResultCarousel({
     if (e.pointerType !== "mouse") return;
     const el = ref.current;
     if (!el) return;
-    drag.current = { down: true, startX: e.clientX, startLeft: el.scrollLeft };
+    drag.current = {
+      down: true,
+      startX: e.clientX,
+      startLeft: el.scrollLeft,
+      moved: false,
+    };
   };
 
   const onPointerMove = (e: React.PointerEvent) => {
     const el = ref.current;
     if (!el || !drag.current.down) return;
-    el.scrollLeft = drag.current.startLeft - (e.clientX - drag.current.startX);
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 6) drag.current.moved = true;
+    el.scrollLeft = drag.current.startLeft - dx;
   };
 
   const stop = () => {
     drag.current.down = false;
+  };
+
+  // Suppress the card's navigation if the pointerup ended a drag, not a click.
+  const onClickCapture = (e: React.MouseEvent) => {
+    if (drag.current.moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      drag.current.moved = false;
+    }
   };
 
   const showThumb = thumb < 0.999;
@@ -96,6 +112,7 @@ export default function ResultCarousel({
         onPointerMove={onPointerMove}
         onPointerUp={stop}
         onPointerLeave={stop}
+        onClickCapture={onClickCapture}
         className="flex cursor-grab touch-pan-x select-none gap-4 overflow-x-auto overflow-y-hidden overscroll-x-contain px-edge-margin-mobile active:cursor-grabbing md:px-edge-margin-desktop [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {listings.map((listing) => (

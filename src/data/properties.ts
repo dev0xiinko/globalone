@@ -209,7 +209,7 @@ export const RECENT_PROPERTIES: Listing[] = [
   },
   {
     id: "heritage-manor",
-    image: IMG_ADVISOR,
+    image: IMG_HERO_VILLA,
     title: "Heritage Manor",
     location: "New Manila, Quezon City",
     price: "₱89,000,000",
@@ -220,3 +220,106 @@ export const RECENT_PROPERTIES: Listing[] = [
     category: "House & Lot",
   },
 ];
+
+// ── Lookups ────────────────────────────────────────────────────────────────
+// Every listing across the site, de-duplicated by id (a few appear in more
+// than one rail). Used to resolve a property page from its [id] segment.
+export const ALL_PROPERTIES: Listing[] = [
+  ...FEATURED_PROPERTIES,
+  ...RECENT_PROPERTIES.filter(
+    (r) => !FEATURED_PROPERTIES.some((f) => f.id === r.id)
+  ),
+];
+
+export function getPropertyById(id: string): Listing | undefined {
+  return ALL_PROPERTIES.find((p) => p.id === id);
+}
+
+/** Suggestions for "Properties you might like" — same category first. */
+export function getRelatedProperties(id: string, count = 3): Listing[] {
+  const current = getPropertyById(id);
+  const pool = ALL_PROPERTIES.filter((p) => p.id !== id);
+  if (!current) return pool.slice(0, count);
+  const ranked = [...pool].sort((a, b) => {
+    const score = (p: Listing) =>
+      (p.category === current.category ? 0 : 2) +
+      (p.tag === current.tag ? 0 : 1);
+    return score(a) - score(b);
+  });
+  return ranked.slice(0, count);
+}
+
+// ── Detail-page content (synthesised mock data for presentation) ─────────────
+const GALLERY_POOL = [
+  IMG_HERO_GRAND,
+  IMG_HERO_AZURE,
+  IMG_HERO_VILLA,
+  IMG_MALIBU,
+  IMG_MANHATTAN,
+  IMG_PROVENCE,
+  IMG_HERO,
+];
+
+/** The hero image plus four supporting shots, rotated per-property. */
+export function getGallery(p: Listing): string[] {
+  const extras = GALLERY_POOL.filter((img) => img !== p.image);
+  const start = p.id.length % extras.length;
+  const rotated = [...extras.slice(start), ...extras.slice(0, start)];
+  return [p.image, ...rotated.slice(0, 4)];
+}
+
+const FEATURES_BY_CATEGORY: Record<string, string[]> = {
+  Condominium: [
+    "Floor-to-ceiling windows",
+    "24/7 concierge & security",
+    "Infinity-edge amenity pool",
+    "Private high-speed elevator",
+    "Fitness & wellness centre",
+    "Two dedicated parking slots",
+  ],
+  "House & Lot": [
+    "Landscaped private garden",
+    "Resort-style swimming pool",
+    "Double-height living pavilion",
+    "Smart-home automation",
+    "Staff quarters & service kitchen",
+    "Four-car covered garage",
+  ],
+};
+
+const GENERIC_FEATURES = [
+  "Premium imported finishes",
+  "Backup power & water systems",
+  "Fibre-ready connectivity",
+  "Gated, master-planned community",
+];
+
+export function getFeatures(p: Listing): string[] {
+  return FEATURES_BY_CATEGORY[p.category] ?? GENERIC_FEATURES;
+}
+
+export function getDescription(p: Listing): string {
+  const home =
+    p.category === "Condominium" ? "residence" : "home";
+  return (
+    `Set within ${p.location}, this ${p.area} ${p.category.toLowerCase()} is an ` +
+    `exceptional ${home} designed for those who expect more. ${p.beds} generous ` +
+    `bedrooms and ${p.baths} designer bathrooms are arranged around light-filled ` +
+    `living spaces that open seamlessly to the outdoors. Every surface has been ` +
+    `specified to an uncompromising standard, delivering a turnkey sanctuary in ` +
+    `one of the country's most sought-after addresses.`
+  );
+}
+
+export type PropertyHighlight = { label: string; value: string };
+
+export function getHighlights(p: Listing): PropertyHighlight[] {
+  return [
+    { label: "Property Type", value: p.category },
+    { label: "Bedrooms", value: String(p.beds) },
+    { label: "Bathrooms", value: String(p.baths) },
+    { label: "Floor Area", value: p.area },
+    { label: "Status", value: p.tag },
+    { label: "Reference", value: `GO-${p.id.slice(0, 6).toUpperCase()}` },
+  ];
+}
